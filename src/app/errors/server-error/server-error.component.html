@@ -1,0 +1,15 @@
+<h4>Ошибка сервера, после перзагрузки страницы сведения об ошибке пропадут!</h4>
+<ng-container *ngIf="error">
+    <h5 class="text-danger">Error: {{error.message}}</h5>
+    <p class="font-weigth-bold">Если ты видишь эту ошибку, то ошибка на сервере</p>
+    <p>Что делать дальше?</p>
+    <ol>
+      <li>Открыть браузер в режиме разработки</li>
+      <li>Проинспектировать Network</li>
+      <li>Проверить ответ на ошибки</li>
+      <li>Проверить Url адрес на правильность написания</li>
+      <li>Открыть Postman и там проверить, если там все нормально то проблема не в Angular</li>
+    </ol>
+    <P>Ниже ваш стек, с него нужно начать расследование</P>
+    <code class="mt-5" style="background-color: whitesmoke;">{{error.details}}</code>
+</ng-container>

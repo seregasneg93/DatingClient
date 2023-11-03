@@ -9,6 +9,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PreventUnsavedChangedGuard } from './_guards/prevent-unsaved-changed.guard';
 
 const routes: Routes = [
   {path:'',component:HomeComponent}, // домашняя страница https://localhost:5001
@@ -18,7 +20,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path:'members',component:MemberListComponent},
-      {path:'members/:id',component:MemberDetailComponent},
+      {path:'members/:userName',component:MemberDetailComponent},
+      {path:'member/edit',component:MemberEditComponent,canDeactivate: [PreventUnsavedChangedGuard]},
       {path:'lists',component:ListsComponent},
       {path:'messages',component:MessagesComponent},
     ]

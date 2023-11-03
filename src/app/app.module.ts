@@ -17,21 +17,33 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { ErrorInterceptor } from './_interseptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { JwtInterceptor } from './_interseptors/jwt.interceptor';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './_interseptors/loading.interceptor';
 
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, MemberDetailComponent, ListsComponent, MessagesComponent, TestErrorsComponent, NotFoundComponent, ServerErrorComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent,
+                 MemberListComponent, MemberDetailComponent, ListsComponent, MessagesComponent,
+                 TestErrorsComponent, NotFoundComponent, ServerErrorComponent, MemberCardComponent, MemberEditComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgxSpinnerModule
   ],
   providers: [
     //указываем свой перехватчик ошибок
-    {provide: HTTP_INTERCEPTORS,useClass: ErrorInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS,useClass: ErrorInterceptor, multi:true},
+    // перехватчик для сохранения токена
+    {provide: HTTP_INTERCEPTORS,useClass: JwtInterceptor, multi:true},
+    // перехватчик для показа загрузки на странице
+    {provide: HTTP_INTERCEPTORS,useClass: LoadingInterceptor, multi:true}
   ],
   bootstrap: [AppComponent],
 })

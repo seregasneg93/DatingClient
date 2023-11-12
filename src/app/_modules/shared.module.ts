@@ -5,6 +5,9 @@ import { ToastrModule } from 'ngx-toastr';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {NgxGalleryModule} from '@kolkov/ngx-gallery';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker'
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [],
@@ -17,14 +20,23 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker'
     TabsModule.forRoot(),
     NgxGalleryModule,
     // грузим дату
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    // выбранная страница
+    PaginationModule.forRoot(),
+    // кнопки с двусторонней привязкой
+    ButtonsModule.forRoot(),
+    // работа со вроемнем
+    TimeagoModule.forRoot()
   ],
   exports:[
     BsDropdownModule,
     ToastrModule,
     TabsModule,
     NgxGalleryModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    PaginationModule,
+    ButtonsModule,
+    TimeagoModule
   ]
 })
 export class SharedModule { }

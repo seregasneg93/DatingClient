@@ -39,6 +39,16 @@ export class MembersService {
     return this.userParams;
   }
 
+  addLike(userName: string){
+    return this.http.post(this.baseUrl + 'likes/' + userName , {});
+  }
+
+  getLikes(predicate : string,pageNumber,pageSize){
+    let params = this.getPaginationHeaders(pageNumber,pageSize);
+    params = params.append('predicate',predicate);
+    return this.getPaginationResult<Partial<Member[]>>(this.baseUrl + 'likes' , params);
+  }
+
   getMembers(userParams: UserParams){
     // кеширование , если ответ есть то возвращаем кеширование
     var responce = this.memberCache.get(Object.values(userParams).join('-'));
